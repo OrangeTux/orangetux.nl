@@ -4,7 +4,7 @@ Category: testing
 Tags: testing, jasmine, depency injection
 Slug: testing-websockets-using-dependency-injection
 Authors: Auke Willem Oosterhoff
-Summary: Testing your code that usesn JavaScript WebSockets can done easily with Jasmine's Spies and Dependency Injection.
+Summary: Testing your code that uses JavaScript WebSockets can done easily with Jasmine's Spies and Dependency Injection.
 
 For my project [Goppetto][goppetto] I needed some event handler that could processes messages received over a websocket from some
 externel server. The JSON formatted messages looked liked this:
