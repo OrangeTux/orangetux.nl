@@ -30,3 +30,5 @@ RELATIVE_URLS = True
 THEME = 'themes/zebra-pelican-theme'
 
 GITHUB_URL = 'http://github.com/orangetux/'
+
+GOSQUARED_SITENAME = 'GSN-081954-Y'
