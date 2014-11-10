@@ -26,9 +26,4 @@ SOCIAL = ()
 DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = False;
 THEME = 'themes/zebra-pelican-theme'
-
-GITHUB_URL = 'http://github.com/orangetux/'
-
-GOSQUARED_SITENAME = 'GSN-081954-Y'
