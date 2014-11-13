@@ -75,3 +75,10 @@ pyvenv.cfg
 Session.vim
 .netrwhist
 *~
+
+# Pelican
+cache
+output
+
+# Misc
+.ropeproject
