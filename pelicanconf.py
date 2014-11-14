@@ -19,13 +19,9 @@ TRANSLATION_FEED_ATOM = None
 
 LINKS = ()
 
-# Social widget
-SOCIAL = ()
-
 DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
 THEME = 'themes/zebra-pelican-theme'
 
-PLUGIN_PATHS = ['plugins']
-PLUGINS = ['disqus_static']
+RELATIVE_URLS = True
