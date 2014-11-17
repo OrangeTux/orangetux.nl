@@ -7,13 +7,13 @@ Installation
 ------------
 If you want to compile the blog yourself, you've to install depedencies.
 
-  $ virtualenv .env
-  $ source .env/bin/activate
-  $ pip install -r requirements
+    $ virtualenv .env
+    $ source .env/bin/activate
+    $ pip install -r requirements
 
 Now build the site:
 
-  $ pelican output
+    $ pelican output
 
 License
 -------
