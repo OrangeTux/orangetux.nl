@@ -1,19 +1,22 @@
-# Blog
+Blog
+====
 The source of the [OrangeTux's blog][1]. The blog is generated using 
 [Pelican][2], a static site generator. It uses the [Zebra Pelican Theme][3].
 
-## Installation
+Installation
+------------
 If you want to compile the blog yourself, you've to install depedencies.
 
-  virtualenv .env
-  source .env/bin/activate
-  pip install -r requirements
+  $ virtualenv .env
+  $ source .env/bin/activate
+  $ pip install -r requirements
 
 Now build the site:
 
-  pelican output
+  $ pelican output
 
-## License
+License
+-------
 This work is licensed under the [Creative Commons Attribution-ShareAlike 3.0
 Unported License][4].
 
