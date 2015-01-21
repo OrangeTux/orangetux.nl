@@ -9,9 +9,10 @@ Summary: Automate build and installation of Android apps, speeding up your devel
 For a small project for school me and my team mate [Maurits van
 Mastrich][mauvm] had to create an Android app. We decided to use
 [Cordova][cordova]. This post demonstrates how to build and install an Android
-create withe Cordova, but you any other you like. We als wanted a Docker
-container which would take care of the building and installation process. It
-turned out to be quite simple (on a Linux machine). 
+app created with Cordova, but you can use any other tool you like. We als
+wanted a Docker container which would take care of the building and
+installation process. It turned out to be quite simple to do (on a Linux
+machine). 
 
 ## Start container
 We used [this image][base_image] for our container. The image comes with
