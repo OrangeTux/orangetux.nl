@@ -1,10 +1,10 @@
-Title: Develop Android apps using Docker
+Title: Automate Android app development with Docker
 Date: 2015-01-21
 Category: docker
 Tags: docker, android
 Slug: develop-android-apps-using-docker
 Authors: Auke Willem Oosterhoff
-Summary: Use a Docker container to develop, build and install Android apps on your phone.
+Summary: Automate build and installation of Android apps, speeding up your develepment.
 
 For a small project for school me and my team mate [Maurits van
 Mastrich][mauvm] had to create an Android app. We decided to use
