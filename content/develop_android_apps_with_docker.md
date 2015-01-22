@@ -102,23 +102,22 @@ Now let's automate this stuff. We created a small `Dockerfile` and put the
 commands used above in a script, both on your host system, of course.
 
     #!
-    FROM ugnb/ubuntu-cordova-android-build                                             
-    MAINTAINER Maurits van Mastrigt <maurits@nerdieworks.nl>                             
+    FROM ugnb/ubuntu-cordova-android-build
                                                                                          
     # Volume where code of app will be mounted on.
-    VOLUME ["/app"]                                                     
+    VOLUME ["/app"]
     WORKDIR /app
                                                                                          
-    CMD ["/var/tools/build.sh"]       
+    CMD ["/var/tools/build.sh"]
 
 Create `build.sh` and put it somewhere in your project, we put in in a `tools/`
 directory. Note line 13, this command removes the previously installed
 application. Replace the package name with the name of your package.
 
     #!bash
-    #!/usr/bin/env bash                                                                
-    set -e                                                                               
-    adb start-server                                                                     
+    #!/usr/bin/env bash
+    set -e
+    adb start-server
     
     # This will force a pop up on your phone asking for permission 
     # to USB debugging.
@@ -143,7 +142,7 @@ And start the container:
     $ docker run -it --priviliged -v $(pwd):/app -v /dev/bus/usb:/dev/bus/usb \
         -v $(pwd)/tools:/var/tools android
 
-# Troubleshooting
+## Troubleshooting
 The process as described above works fine on a Linux machine. We had problems
 on OSX. Docker runs on OSX inside VirtualBox which could cause problems with
 mounting the USB device nodes through the VirtualBox layer in your docker
@@ -154,7 +153,7 @@ Android phone pops op. Even if you checked "Always allow from this computer".
 We don't exactly know how to fix this.
 
 Sometimes the Android phone isn't visible inside the container or is
-`unauthorized`. Unplug and plug your phone and restarting the container might  
+`unauthorized`. Unplug and plug your phone and restarting the container might 
 help.
 
 [cordova]:http://cordova.apache.org
