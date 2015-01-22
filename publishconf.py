@@ -19,4 +19,4 @@ CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
 DELETE_OUTPUT_DIRECTORY = True
 
 # Following items are often useful when publishing
-GOOGLE_ANALYTICS = "UA-56592474-1"
+DISQUS_SITENAME = "orangetux"
