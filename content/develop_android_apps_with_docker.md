@@ -1,13 +1,13 @@
 Title: Automate Android app development with Docker
-Date: 2015-01-21
+Date: 2015-01-22
 Category: docker
 Tags: docker, android
-Slug: develop-android-apps-using-docker
+Slug: automate-android-app-development-with-docker
 Authors: Auke Willem Oosterhoff
 Summary: Automate build and installation of Android apps, speeding up your develepment.
 
 For a small project for school me and my team mate [Maurits van
-Mastrich][mauvm] had to create an Android app. We decided to use
+Mastricht][mauvm] had to create an Android app. We decided to use
 [Cordova][cordova]. This post demonstrates how to build and install an Android
 app created with Cordova, but you can use any other tool you like. We als
 wanted a Docker container which would take care of the building and
@@ -18,21 +18,33 @@ machine).
 We used [this image][base_image] for our container. The image comes with
 Cordova and some Android build tools.
 
-Assuming you are in the root of your Android project, start the container like
+Create a folder where you want your code to be and start the container like
 this:
 
-    $ docker run -it --priviliged -v .:/app -v /dev/bus/usb:/dev/bus/usb \
+    $ docker run -it --priviliged -v $(pwd):/app -v /dev/bus/usb:/dev/bus/usb \
         ugnb/ubuntu-cordova-android-build /bin/bash
 
-This command will start a container and mounts your source code in it. It also
-mounts the the USB device nodes from your host machine into the container. The
-`--priviliged` flag gives the container access to all devices. This way the
-container can access your Android phone via the USB debugger. 
+This command will start a container and mounts your (empty) code directory in
+it. It also mounts the USB device nodes from your host machine into the
+container. The `--priviliged` flag gives the container access to all devices.
+This way the container can access your Android phone via the USB debugger. 
+
+## Create app
+First we need some code to build our app from. 
+
+    $ cordova create /app com.github.orangetux SampleApp
+
+This command will genere the code for your app in `/app` directory of your
+container. Because this directory has been mounted from your host machine this
+code should also be visible on your host. Now add support for Android:
+
+    $ cordova platform add android
 
 ## Debug USB
-Install `usbutils` in your container, connect your Android phone with your host
-and check if you you can 'see' your phone by running `lsusb`. Our phone is
-connected on bus 003.
+Before you can install the app on your phone the USB ports of your host should
+be available in the conainter. Install `usbutils` in your container, connect
+your Android phone with your host and check if you you can 'see' your phone by
+running `lsusb`. Our phone is connected on bus 003 device 003.
 
     root@0520d37b082e:/# lsusb
     Bus 004 Device 003: ID 2232:1054  
@@ -50,7 +62,7 @@ connected on bus 003.
     Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
 When youre phone is connected start the [Android Debugger Bridge][adb] and
-check if `adb` is able to to detect your phone as well.
+check if `adb` is able to to detect your phone as well:
 
     root@c547f9b34347:/# adb devices
     * daemon not running. starting it now on port 5037 *
@@ -118,7 +130,7 @@ application. Replace the package name with the name of your package.
                                                                                        
     # Delete current installation of app if present.
     echo ">> Deleting app..."                                                            
-    adb shell pm uninstall your.package.name
+    adb shell pm uninstall com.github.orangetux
                                                                                        
     cordova run --device                 
 
@@ -139,12 +151,13 @@ container.
 
 Every time the container starts the "Allow USB debugging" pop up on your
 Android phone pops op. Even if you checked "Always allow from this computer".
-We don't exactly now how to fix this.
+We don't exactly know how to fix this.
 
 Sometimes the Android phone isn't visible inside the container or is
-`unauthorized`. Unplug and plug your phone and restart the container helps.
+`unauthorized`. Unplug and plug your phone and restarting the container might  
+help.
 
-[cordova]:cordova.apache.org
+[cordova]:http://cordova.apache.org
 [base_image]:https://registry.hub.docker.com/u/ugnb/ubuntu-cordova-android-build/
 [adb]:http://developer.android.com/tools/help/adb.html
 [mauvm]:http://mauvm.nl
