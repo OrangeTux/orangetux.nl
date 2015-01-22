@@ -4,15 +4,14 @@ Category: docker
 Tags: docker, android
 Slug: automate-android-app-development-with-docker
 Authors: Auke Willem Oosterhoff
-Summary: Automate build and installation of Android apps, speeding up your develepment.
+Summary: Automate build and installation of Android apps, speeding up your development.
 
-For a small project for school me and my team mate [Maurits van
-Mastrigt][mauvm] had to create an Android app. We decided to use
-[Cordova][cordova]. This post demonstrates how to build and install an Android
-app created with Cordova, but you can use any other tool you like. We als
-wanted a Docker container which would take care of the building and
-installation process. It turned out to be quite simple to do (on a Linux
-machine). 
+For a small project for school me and my teammate [Maurits van Mastrigt][mauvm]
+had to create an Android app. We decided to use [Cordova][cordova]. This post
+demonstrates how to build and install an Android app created with Cordova, but
+you can use any other tool you like. We also wanted a Docker container which
+would take care of the building and installation process. It turned out to be
+quite easy to do (on a Linux machine). 
 
 ## Start container
 We used [this image][base_image] for our container. The image comes with
@@ -95,7 +94,7 @@ the root directory of your app, build and install your application:
     12Launching application...
     LAUNCH SUCCESS
 
-Great, you build and installed your app from a Docker conainer!
+Great, you build and installed your app from a Docker container!
 
 ## Automate
 Now let's automate this stuff. We created a small `Dockerfile` and put the
