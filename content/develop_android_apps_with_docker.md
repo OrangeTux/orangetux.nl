@@ -7,7 +7,7 @@ Authors: Auke Willem Oosterhoff
 Summary: Automate build and installation of Android apps, speeding up your develepment.
 
 For a small project for school me and my team mate [Maurits van
-Mastricht][mauvm] had to create an Android app. We decided to use
+Mastrigt][mauvm] had to create an Android app. We decided to use
 [Cordova][cordova]. This post demonstrates how to build and install an Android
 app created with Cordova, but you can use any other tool you like. We als
 wanted a Docker container which would take care of the building and
