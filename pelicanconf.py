@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
+from datetime import datetime
 
 AUTHOR = 'Auke Willem Oosterhoff'
 SITENAME = 'home is where the ~ is'
@@ -23,5 +24,7 @@ DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
 THEME = 'themes/zebra-pelican-theme'
+
+COPY_RIGHT_YEAR = datetime.now().strftime('%Y')
 
 #RELATIVE_URLS = True
