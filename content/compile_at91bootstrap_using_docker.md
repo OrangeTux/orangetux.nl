@@ -7,7 +7,7 @@ Authors: Auke Willem Oosterhoff
 Summary: Cross-compile AT91Bootstrap boot loader for Atmel's SMART microprocessor in a Docker container without bloating your system with a tool chain.
 Status: draft
 
-A few weeks ago [Tom de Boer][tom_de_boer] helped me to get Linux 4.0k working
+A few weeks ago [Tom de Boer][tom_de_boer] helped me to get Linux 4.0 working
 on Atmel's [AT91SAM9G25][at91sam9g25]. Cross compiling a bootloader was part of
 that process. An open source bootloader for this SoC is available:
 [AT91Bootstrap][at91bootstrap]. From its [README][readme]:
