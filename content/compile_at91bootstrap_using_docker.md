@@ -4,8 +4,7 @@ Category: docker
 Tags: docker
 Slug: compile-at91bootstrap-using-docker
 Authors: Auke Willem Oosterhoff
-Summary: Cross-compile AT91Bootstrap boot loader for Atmel's SMART microprocessor in a Docker container without bloating your system with a tool chain.
-Status: draft
+Summary: Cross-compile AT91Bootstrap bootloader for Atmel's SMART microprocessor in a Docker container without bloating your system with a tool chain.
 
 A few weeks ago [Tom de Boer][tom_de_boer] helped me to get Linux 4.0 working
 on Atmel's [AT91SAM9G25][at91sam9g25]. Cross compiling a bootloader was part of
@@ -96,8 +95,8 @@ The build products can be found in `/root/at91bootstrap/binaries/`.
 ## Persist build products
 Although above instructions work, the are not very useful on their own. 
 The configuration created with `make menuconfig` is saved in the container, but
-is not accessible from the host. Because the stateless nature of containers
-you've to reconfigure AT91Bootstrap every time the container is started. In
+is not accessible from the host. Because of the stateless nature of containers
+you have to reconfigure AT91Bootstrap every time the container is started. In
 order to save the configuration for future use the configuration must be saved
 on the host. This can be achieved using Docker's volumes. 
 
@@ -114,7 +113,7 @@ The file is shared between host and container.
 is mounted. [Here][.config] is a 'real' config with all default settings.
 
 The build products in `binaries/` are not saved on the host too, just like the
-configuration. In order to save the om the host machine create a directory 
+configuration. In order to save them on the host machine create a directory 
 and mount it as a volume at `/root/at91bootstrap/binaries` in the container.
 
     #!
@@ -124,7 +123,7 @@ and mount it as a volume at `/root/at91bootstrap/binaries` in the container.
         orangetux/at91bootstrap
 
 ## Wrapping up
-The Dockerfile and a small script to save are config and build products have
+The Dockerfile and a small script to save the config and build products have
 been published in [this][orangetux/docker-at91bootstrap] repository on GitHub. 
 A Docker image is available at [Docker Hub][docker-hub].
 
