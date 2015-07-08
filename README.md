@@ -11,6 +11,11 @@ If you want to compile the blog yourself, you've to install depedencies.
     $ source .env/bin/activate
     $ pip install -r requirements
 
+Fetch the theme:
+    
+    $ git submodule init
+    $ git submodule update
+
 Now build the site:
 
     $ pelican output
