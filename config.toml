@@ -1,0 +1,30 @@
+languageCode = "en-us"
+title = "home is where the ~ is"
+
+[params]
+	title = "orangetux.nl"
+	copyright = "Released under the MIT license."
+
+	# You can choose between green, orange, red and blue.
+	themecolor = "orange"
+
+	# Link custom assets relative to /static
+	favicon   = "favicon.ico"
+	customCSS = []
+	customJS  = []
+
+	# To provide some metadata for search engines and the about section in the footer
+	# feel free to add a few information about you and your website.
+	name = "Auke Oosterhoff"
+	bio = "embedded linux engineer - programmer - blogger - beer "
+	description = "hack the lulz"
+
+	# Link your social networks (optional)
+	github = "orangetux"
+
+	# Customize or translate the strings
+	keepReadingStr = "Keep reading"
+	backtotopStr = "Back to top"
+	shareStr = "Share"
+	pageNotFoundTitle = "404 - Page not found"
+

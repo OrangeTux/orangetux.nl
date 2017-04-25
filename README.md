@@ -1,31 +1,23 @@
-Blog
-====
-The source of the [OrangeTux's blog][1]. The blog is generated using 
-[Pelican][2], a static site generator. It uses the [Zebra Pelican Theme][3].
+# orangetux.nl
 
-Installation
-------------
-If you want to compile the blog yourself, you've to install depedencies.
+## Installation
 
-    $ virtualenv .env
-    $ source .env/bin/activate
-    $ pip install -r requirements
+Clone the sources:
 
-Fetch the theme:
-    
-    $ git submodule init
-    $ git submodule update
+```
+$ git clone git@github.com:OrangeTux/orangetux.nl.git
+$ cd orangetux.nl
+```
 
-Now build the site:
+Get the theme:
 
-    $ pelican output
+```
+$ mkdir themes
+$ git clone https://github.com/digitalcraftsman/hugo-steam-theme.git themes/hugo-steam-theme
+```
 
-License
--------
-This work is licensed under the [Creative Commons Attribution-ShareAlike 3.0
-Unported License][4].
+Run it:
 
-[1]:http://orangetux.nl
-[2]:http://docs.getpelican.com/en/3.5.0/
-[3]:https://github.com/ozanyildiz/zebra-pelican-theme
-[4]:http://creativecommons.org/licenses/by-sa/3.0/
+```
+$ hugo server --theme=hugo-steam-theme --buildDrafts -w
+```
