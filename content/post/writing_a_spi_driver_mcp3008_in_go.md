@@ -1,6 +1,6 @@
 +++
 date = "2017-04-23T12:02:53+02:00"
-draft = true
+draft = false
 title = "Writing a SPI driver for the MCP3008 in Go"
 description = "Use Go to create a simple driver to interact with the MCP3008 using SPI."
 tags = [
@@ -45,7 +45,7 @@ line is pulled low.
 For more information about SPI read the [Linux kernel documentation][kernel]
 about this topic. I found another great article on [Sparkfun][sparkfun].
 
-## Create driver
+## Open device
 Note that to interact with SPI devices from userspace the [spidev][spidev]
 kernel driver needs to be loaded.
 
@@ -72,9 +72,10 @@ defer conn.Close()
 ```
 
 The device is located at `/dev/spidev32766.0` and it's configured with a
-maximum clock speed of 5000000 Hz. This exact number depends on the on the
-slave and the reverence input. You should look it up in the datasheet of the
-slave.  The maximum frequency for the MCP3008 is 3.6 Mhz.
+maximum clock speed of 3600000 Hz. This exact number depends on the on the
+slave and its reference input voltage. You should look it up in the datasheet
+of the slave. With a reference input of 5V the maximum frequency for the
+MCP3008 is 3.6 Mhz.
 
 {{<figure src="/img/mcp3008_frequency.png">}}
 
@@ -85,11 +86,11 @@ datasheet.
 
 ## Read channel
 The ADC measures the voltage difference between 2 pins. A single-ended input
-samples its input in the range from the ground (0V) to Vref, or the refence
+samples its input in the range from the ground (0V) to Vref, that is the refence
 input. A 10-bits ADC with a reference input of 5V has a precision of `(5 - 0) /
 1024 = 0.0049V = 4.9mV` on single-ended inputs.
 
-A (pseudo-)differential output input samples its input between voltage of a
+A (pseudo-)differential input samples its input between voltage of a
 second pin and Vref, allowing measurements with higher precision. Assume a
 voltage on that second pin is 3V and Vref is 5V. That gives a precision of
 `(5 - 3) / 1024 = 0.0020V = 2.0mV` for measurements between 3V and 5V. Of

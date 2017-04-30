@@ -6,7 +6,7 @@ series = ["Ted"]
 slug = "obd-ii-elm327-and-python"
 +++
 
-In the [previous post]({{< relref "post/have-you-met-ted.md" >}}) I
+In the [previous post]({{< relref "post/have_you_met_ted.md" >}}) I
 introduced you to Ted, a car computer that I plan to build. In this posts I
 describe my first steps: getting live data from the car using the OBD-II
 connector and Python.
@@ -60,7 +60,7 @@ from obd import OBD, commands
 
 
 def execute_command(con, cmd):
-    """ Exucte AT command and return result. """
+    """ Execute AT command and return result. """
     return connection.query(cmd).value
 
 
