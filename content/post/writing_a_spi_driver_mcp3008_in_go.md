@@ -159,7 +159,7 @@ The complete driver for the MCP3008 can be found in the package
 [github.com/advancedclimate/io/spi/adc][github]. It also implements drivers
 for the [MCP3004][mcp3004], [MCP3204][mcp3204] and [MCP3208][mcp3208].
 
-[github]: https://github.com/AdvancedClimateSystems/io/tree/master/spi/adc
+[github]: https://github.com/AdvancedClimateSystems/io/tree/master/spi/microchip
 [go_spi]: https://godoc.org/golang.org/x/exp/io/spi
 [kernel]: https://www.kernel.org/doc/Documentation/spi/spi-summary
 [mcp3004]: http://www.microchip.com/wwwproducts/en/MCP3003
