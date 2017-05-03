@@ -19,31 +19,33 @@ Using SPI in Go is easy using the experimental
 [golang.org/x/exp/io/spi][go_spi] package. In this post I'll show how to read
 analog values using the [MCP3008][mcp3008] over SPI. The MCP3008 is an Analog
 Digital Converter (ADC) with 8 analog input channels. It has a resolution of 10
-bits which means it can read values up to `2^10 = 1024`.
+bits which means it can read up to `2^10 = 1024` different values.
 
 ## SPI
 Serial Periphiral Interface (SPI) is a master-slave protocol and it's used a
 lot for communications between chips in embedded systems. One master can
 communicate with one or more slaves.
 
-SPI is a so-called four-wire procotol because it requires (at least) 4 wires:
+SPI is a so-called four-wire procotol because it requires 4 wires:
 
-* Serial Clock (SLCK)
+* Serial Clock (SLCK or SCK)
 * Master Input Slave Output (MISO)
 * Master Output Slave Input (MOSI)
 * Slave Select (SS)
 
+
 The master controls the SLCK line. One bit of data is shifted on every pulse on
 the SLCK line.  The MISO line is used to transfer data from the client to the
-master and the MOSI line is used to transfer data the other way around.  SPI is
+master and the MOSI line is used to transfer data the other way around. SPI is
 a synchronous protocol, so for every byte you write on the MOSI line, you read
-1 byte from the MISO line.
+1 byte from the MISO line. The SS line is used to select a slave. A slave only
+communicates if it's SS line is pulled low.
 
-The SS line is used to select a slave. A slave only communicates if it's SS
-line is pulled low.
+{{<figure src="/img/spi.png">}}
 
 For more information about SPI read the [Linux kernel documentation][kernel]
-about this topic. I found another great article on [Sparkfun][sparkfun].
+about this topic. The image above comes from this great article about SPI from
+[Sparkfun][sparkfun].
 
 ## Open device
 Note that to interact with SPI devices from userspace the [spidev][spidev]
@@ -101,7 +103,15 @@ followed by a bit to indicating single-ended (1) or pseudo-differential mode
 (0). The next 3 bytes are used to select 1 the 8 channels. The MCP3008 will
 "answer" with a 10 digital output code. The following figure from
 [MCP3008's datasheet][mcp3008_datasheet] visualize the process.
-Note the null byte between the request and te response.
+The datasheet names the lines differently, but
+
+* CS is Chip Select
+* CLK is Serial Clock
+* Din is MOSI
+* Dout is MISO
+
+Note the null bit between the request on the Din line and the the response on
+the Dout line.
 
 {{<figure src="/img/mcp3008_communication.png">}}
 
@@ -114,7 +124,8 @@ single-ended mode:
 //        | ||||-------------- 3 bits to select channel
 // 00000001 11010000 00000000
 // Out is te data send over the MOSI line.
-out := []byte{1, 208, 0}
+channel := 5
+out := []byte{1, (8 + channel) << 4, 0}
 // In is the data received over the MISO line.
 in := make([]byte, 3)
 
