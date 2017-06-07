@@ -19,13 +19,13 @@ the status of the various vehicle subsystems.” So the OBD interface can be use
 to obtain all kinds of information about the car. Think of error codes, the
 current speed, temperature of the engine oil, the engine RPM and so on. Each
 parameter has his own Paramater ID (PID). A big list of PID’s can be found on
-[Wikipedia][pid]. Most car manufactores don’t implement all PID’s. In fact, my
+[Wikipedia][pid]. Most car manufactures don’t implement all PID’s. In fact, my
 car has only 7 PIDs implemented.
 
 {{<figure src="/img/obd-ii-connector.jpg">}}
 
-Car manufacturers can choose out of 5 procotols to speak over the OBD-II
-interface. Most cars only implement only 1 procotols, as does my car. My cars
+Car manufacturers can choose out of 5 protools to speak over the OBD-II
+interface. Most cars only implement only 1 protocols, as does my car. My cars
 talks CAN.
 
 It’s very easy to use the OBD-II interface to read the status of your car. For
@@ -38,7 +38,7 @@ worked pretty well.
 
 ## ELM327
 The Bluetooth adapter contains a [ELM327](elm327) microcontroller. This chip
-acts as a proxy between you and the OBD-II connector. You can controll the
+acts as a proxy between you and the OBD-II connector. You can control the
 chip by sending commands. In order to get the current speed of the car you send
 010D.  010D is de PID of the current speed. The ELM327 controller translates
 this command. In my case it sends out a request on the CAN bus.

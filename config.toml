@@ -17,7 +17,7 @@ customJS  = []
 # To provide some metadata for search engines and the about section in the footer
 # feel free to add a few information about you and your website.
 name = "Auke Willem Oosterhoff"
-bio = "embedded Linux engineer - creator of [uModbus](https://github.com/AdvancedClimateSystems/uModbus)"
+bio = "embedded Linux engineer - creator of [uModbus](https://github.com/AdvancedClimateSystems/uModbus) and [Goldfish](https://github.com/AdvancedClimateSystems/goldfish)"
 
 # Link your social networks (optional)
 github = "orangetux"

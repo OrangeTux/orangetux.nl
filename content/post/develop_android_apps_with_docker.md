@@ -27,13 +27,13 @@ Create a folder where you want your code to be and start the container like
 this:
 
 ```
-$ docker run -it --priviliged -v $(pwd):/app -v /dev/bus/usb:/dev/bus/usb \
+$ docker run -it --privileged -v $(pwd):/app -v /dev/bus/usb:/dev/bus/usb \
     ugnb/ubuntu-cordova-android-build /bin/bash
 ```
 
 This command will start a container and mounts your (empty) code directory in
 it. It also mounts the USB device nodes from your host machine into the
-container. The `--priviliged` flag gives the container access to all devices.
+container. The `--privileged` flag gives the container access to all devices.
 This way the container can access your Android phone via the USB debugger.
 
 ## Create app
@@ -163,7 +163,7 @@ $ docker build -t="android"
 And start the container:
 
 ```
-$ docker run -it --priviliged -v $(pwd):/app -v /dev/bus/usb:/dev/bus/usb \
+$ docker run -it --privileged -v $(pwd):/app -v /dev/bus/usb:/dev/bus/usb \
     -v $(pwd)/tools:/var/tools android
 ```
 

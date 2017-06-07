@@ -22,11 +22,11 @@ Digital Converter (ADC) with 8 analog input channels. It has a resolution of 10
 bits which means it can read up to `2^10 = 1024` different values.
 
 ## SPI
-Serial Periphiral Interface (SPI) is a master-slave protocol and it's used a
+Serial Peripheral Interface (SPI) is a master-slave protocol and it's used a
 lot for communications between chips in embedded systems. One master can
 communicate with one or more slaves.
 
-SPI is a so-called four-wire procotol because it requires 4 wires:
+SPI is a so-called four-wire protocol because it requires 4 wires:
 
 * Serial Clock (SLCK or SCK)
 * Master Input Slave Output (MISO)
