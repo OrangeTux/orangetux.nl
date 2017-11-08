@@ -7,9 +7,6 @@ slug = "cars-and-can"
 author = "Auke Willem Oosterhoff"
 +++
 
-J1979 OBD-II
-ISO 14229 UDS
-
 In [previous post]({{< relref "post/obd_ii_elm327_and_python.md">}}) of this
 series I demonstrated how to obtain live data of a car by using an OBD-II
 adapter. I was a bit disappointend about the fact that I could only read a
@@ -20,8 +17,8 @@ interact with a car's CAN bus in Linux with help of a an Arduino Uno.
 ## CAN bus
 
 Every car contains electronic chips to control parts of the car. The are called
-Electronic Control Units (ECUs). I identified around a few ECUs in my car
-from 2006. Modern cars do have even more chips on board.
+Electronic Control Units (ECUs). I identified a few ECUs in my car
+from 2006. Modern cars have a lot more chips on board.
 
 To list a few of the ECUs:
 
@@ -146,15 +143,14 @@ bus in your car. You also learned how to read data from the CAN bus using the
 Linux CAN subsystem, also known as SocketCAN. In the next post I'll show how
 to find meaning in the flood of messages that is send over the CAN bus.
 
-## References
+## Further reading
 
 * [Hacking Cars wit Python - Eric Evenchick](https://www.youtube.com/watch?v=3bZNhMcv4Y8)
-* [Hacking into a Vehicle CAN bus - Fabio Baltieri][https://fabiobaltieri.com/2013/07/23/hacking-into-a-vehicle-can-bus-toyothack-and-socketcan/]
-* [CAN bus - Wikipedia][wikipedia]
-* [Car Hacker's Handbook - Craig Smith][car-hackers-handbook]
 * [Vehicle Hacking Village - Eric Evenchick (video)](https://www.youtube.com/watch?v=Ym8xFGO0llY)
 * [Hopping on the CAN bus - Eric Evenchick (video)](https://www.youtube.com/watch?v=U1yecKUmnFo)
-
+* [Hacking into a Vehicle CAN bus - Fabio Baltieri](https://fabiobaltieri.com/2013/07/23/hacking-into-a-vehicle-can-bus-toyothack-and-socketcan/)
+* [CAN bus - Wikipedia][wikipedia]
+* [Car Hacker's Handbook - Craig Smith][car-hackers-handbook]
 
 [bus-protocols]: http://opengarages.org/handbook/ebook/#calibre_link-261
 [can-bus-shield]: https://www.tinytronics.nl/shop/nl/arduino/shields/can-bus-shield-mcp2515?search=can
