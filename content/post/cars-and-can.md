@@ -9,16 +9,16 @@ author = "Auke Willem Oosterhoff"
 
 In [previous post]({{< relref "post/obd_ii_elm327_and_python.md">}}) of this
 series I demonstrated how to obtain live data of a car by using an OBD-II
-adapter. I was a bit disappointend about the fact that I could only read a
-handfull of parameters. Together with Wisse Hooghiem I went a step further by
+adapter. I was a bit disappointed about the fact that I could only read a
+handful of parameters. Together with Wisse Hooghiem I went a step further by
 hooking up in the CAN network of my car. In this post I'll demonstrate how to
 interact with a car's CAN bus in Linux with help of a an Arduino Uno.
 
 ## CAN bus
 
-Every car contains electronic chips to control parts of the car. The are called
-Electronic Control Units (ECUs). I identified a few ECUs in my car
-from 2006. Modern cars have a lot more chips on board.
+First, what is CAN? Every car contains electronic chips to control parts of the
+car. The are called Electronic Control Units (ECUs). I identified a few ECUs in
+my car from 2006. Modern cars have a lot more chips on board.
 
 To list a few of the ECUs:
 
@@ -30,17 +30,20 @@ To list a few of the ECUs:
 
 Most ECUs require input from other ECUs to operate. For example the Airbag
 Control Unit requires information about speed, acceleration and occupant
-status. Therefore in most cars the ECUs are connected using a CAN bus.
-CAN is an acronym for Controller Area Network and it has beend developed by the
-German company Bosch. CAN is a simple and cheap 2-wire bus. Its first use in
-cars dates back to 1990.
+status. Therefore, in most cars the ECUs are connected using a CAN bus.
+CAN is an acronym for Controller Area Network and it has been developed by the
+German company Bosch. CAN is a simple 2-wire bus. Its
+first use in cars dates back to 1990.
 
 ## Data frames
 
 CAN has 4 packet types. But in this post we're only interested in 1 type: the
 data frame. A data frame is used to send data, for example the motor
-temperature. These frames are broadcasted over the bus. A data frame constists
-of 4 parts:
+temperature. These frames are broadcasted over the bus. The other packet types
+are used for transmitting errors, to ask for data or to add a small delay
+between other frames.
+
+A data frame constists of 4 parts:
 
 * Arbitration ID
 * Identifier Exentions
