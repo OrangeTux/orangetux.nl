@@ -1,6 +1,6 @@
 +++
 date = "2017-06-07T12:02:53+02:00"
-draft = true
+draft = false
 title = "expvar in action"
 description = "Expose application and runtime metrics in Go using the expvar package"
 tags = [
@@ -230,8 +230,8 @@ recalculated every time someone visits http://localhost:1818/debug/vars.
 ``` go
 var start = time.Now()
 
-func calculateUptime() int64 {
-    return time.Since(start) * time.Second
+func calculateUptime() interface {
+    return  int64(time.Since(start) * time.Second)
 }
 
 expvar.Publish("uptime", expvar.Func(calculateUptime))
