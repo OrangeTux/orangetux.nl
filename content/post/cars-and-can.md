@@ -12,13 +12,14 @@ series I demonstrated how to obtain live data of a car by using an OBD-II
 adapter. I was a bit disappointed about the fact that I could only read a
 handful of parameters. Together with Wisse Hooghiem I went a step further by
 hooking up in the CAN network of my car. In this post I'll demonstrate how to
-interact with a car's CAN bus in Linux with help of a an Arduino Uno.
+interact with a car's CAN bus in Linux with help of an Arduino Uno.
 
 ## CAN bus
 
 First, what is CAN? Every car contains electronic chips to control parts of the
-car. The are called Electronic Control Units (ECUs). I identified a few ECUs in
-my car from 2006. Modern cars have a lot more chips on board.
+car. Even an old [Pontiac Fiero][himym] has a few. The are called Electronic
+Control Units (ECUs). I identified a few ECUs in my car from
+2006. Modern cars have a lot more chips on board.
 
 To list a few of the ECUs:
 
@@ -26,7 +27,7 @@ To list a few of the ECUs:
   engine speed monitoring
 * Door Control Unit (DCU) - handles the (un)locking of the doors and the
   windows
-* Tranmission Control Unit (TCU) - controlls the operations related to the tranmsission
+* Tranmission Control Unit (TCU) - controlls the operations related to the transmission
 
 Most ECUs require input from other ECUs to operate. For example the Airbag
 Control Unit requires information about speed, acceleration and occupant
@@ -39,25 +40,26 @@ first use in cars dates back to 1990.
 
 CAN has 4 packet types. But in this post we're only interested in 1 type: the
 data frame. A data frame is used to send data, for example the motor
-temperature. These frames are broadcasted over the bus. The other packet types
+temperature. These frames are broadcast over the bus. The other packet types
 are used for transmitting errors, to ask for data or to add a small delay
 between other frames.
 
-A data frame constists of 4 parts:
+A data frame consists of 4 parts:
 
 * Arbitration ID
-* Identifier Exentions
+* Identifier Extensions
 * Data Length
 * Data
 
-All parts are marked in the image below.
+All parts are marked in the image below. This image was taken from
+[Wikipedia][wikipedia].
 
 {{<figure src="/img/can_data_frame_layout.png">}}
 
 The arbitration id defines the meaning of the data. For example in my car the
 data frames with id 0x2F1 contain the steering angle. Normally this id is 11
 bits in length. This is called a base frame. In case of a base frame the
-Identifier Extenstion bit is 0. When this bit is 1 it's called an extened
+Identifier Extension bit is 0. When this bit is 1 it's called an extended
 frame. With these type the id is 29 bits long.
 
 The data length part holds amount of bytes of data to follow. The data can be 8
@@ -65,7 +67,7 @@ bytes long at max.
 
 This intro into CAN is fairly brief. If you want to learn more about this topic
 I recommend reading [Wikipedia page about CAN][wikipedia] or [chapter
-2][bus-protocols] of the [Car Hacker's Handbook][car-hackers-handbook] by Craig
+2][bus-protocols] of [The Car Hacker's Handbook][car-hackers-handbook] by Craig
 Smith.
 
 ## MCP2515
@@ -79,7 +81,8 @@ sketch][sketch] must be loaded on the Arduino.
 
 The shield must be connected to the CAN bus. If your car has a CAN bus it's
 very likely that the bus is wired to the OBD-II connector. Pins 6 and 14 are
-reserved for the CAN bus as shown in the image below.
+reserved for the CAN bus as shown in the image which is from [The Car Hacker's
+Handbook][car-hackers-handbook].
 
 {{<figure src="/img/obd-ii-pin-out.jpg">}}
 
@@ -99,7 +102,7 @@ As mentioned before, your laptop probably doesn't have a CAN port. Often
 external CAN devices, like our Arduino, are connected via serial and use their
 own protocol to communictie: slcan, which stands for serial can. slcan is an
 ASCII representation of CAN. The code on the Arduino does nothing more than
-translating CAN to slcan and vice verca.
+translating CAN to slcan and vice versa.
 
 ## can-utils
 
@@ -129,7 +132,10 @@ $ sudo ip link set up slcan0
 ```
 
 The first command configures the `slcan0` interface with a baudrate of
-1000000. The latter comand brings the `slcan0` interface up. Just as you would
+1000000. This value matches with the baudrate as set in the Arduino code. Look
+for a line that reads `Serial.begin(1000000)`.
+
+The latter command brings the `slcan0` interface up. Just as you would
 do with a 'normal' network interface.
 
 Assuming that the shield is connected to the your car's CAN bus you now should
@@ -158,5 +164,6 @@ to find meaning in the flood of messages that is send over the CAN bus.
 [bus-protocols]: http://opengarages.org/handbook/ebook/#calibre_link-261
 [can-bus-shield]: https://www.tinytronics.nl/shop/nl/arduino/shields/can-bus-shield-mcp2515?search=can
 [car-hackers-handbook]: http://opengarages.org/handbook/
+[himym]: https://johnautry24.files.wordpress.com/2014/02/295320_1252172195447_full.jpg
 [mcp2515]: http://www.microchip.com/wwwproducts/en/en010406
 [wikipedia]: https://en.wikipedia.org/wiki/CAN_bus
