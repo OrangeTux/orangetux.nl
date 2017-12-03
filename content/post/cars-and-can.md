@@ -57,8 +57,8 @@ All parts are marked in the image below. This image was taken from
 {{<figure src="/img/can_data_frame_layout.png">}}
 
 The arbitration id defines the meaning of the data. For example in my car the
-data frames with id 0x2F1 contain the steering angle. Normally this id is 11
-bits in length. This is called a base frame. In case of a base frame the
+data frames with id 0x2F1 contain the steering angle. Generally this id has a
+lenght of 11 bits. This is called a base frame. In case of a base frame the
 Identifier Extension bit is 0. When this bit is 1 it's called an extended
 frame. With these type the id is 29 bits long.
 
@@ -87,7 +87,7 @@ Handbook][car-hackers-handbook].
 {{<figure src="/img/obd-ii-pin-out.jpg">}}
 
 The main component of the shield is the [MCP2515][mcp2515]. This is a
-CAN-controller with a SPI interface. I haven't tried, but I guess any other
+CAN controller with a SPI interface. I haven't tried, but I guess any other
 shield with the MCP2515 that fits on a Arduino Uno will work as well.
 
 ## SocketCAN
