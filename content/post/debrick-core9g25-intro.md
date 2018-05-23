@@ -1,32 +1,39 @@
 +++
-title= "Debricking CORE 9G25: Intro"
+title= "Debricking CORE 9G25: Understanding the boot process"
 date= 2018-05-20T11:02:29+02:00
 series = ["Unbrick CORE 9G25"]
 author = "Auke Willem Oosterhoff"
+description = "First post about fixing a bricked CORE 9G25 using SAM-BA."
+slug = "debricking-core-9g25-understanding-the-boot-process"
 draft= true
 +++
 
 At [ACS Buildings][acs] one of our products is build around [CORE
-9G25][core9g25]. The heart of this System on a Module is the 400 MHz ARM CPU
-[AT91SAM9G25][at91sam9g25] from Atmel. It also contains 256 MB of RAM and a
-Nand flash of the same size.
+9G25][core9g25]. This System on a Module (SoM) has a the 400 MHz ARM CPU
+[AT91SAM9G25][at91sam9g25] from Atmel (which has been bought by Microchip). It
+also contains 256 MB of RAM and a NAND flash of the same size. The following
+image shows the SoM, it's taken from the website of [CoreWind][corewind].
 
-The SoM is shipped with 2 bootloaders, a Linux kernel and a root filesystem
-on the Nand. Because this software is quite old we reflash the Nand and replace
-the stack with more recent firmware. Reflashing the Nand wrongly can lead to
-bricked and unusable devices. In a series of 3 posts I'll demonstrate how to
-fix a bricked CORE 9G25. In this post I'll explain how normal reflash procudere
-and boot procedure of the CORE 9G25 work. In the next 2 posts I'll explain how
-to unbrick the module using SAM-BA monitor on [Linux]({{< relref
-"post/debrick_core9g25_using_sam_ba_on_linux.md" >}}) or [Windows]({{< relref
-"post/debrick_core9g25_using_sam_ba_on_windows.md" >}}).
+{{<figure src="/img/core9g25.jpg">}}
+
+The vendor doesn't ship the SoM with an empty NAND. It already contains 2
+bootloaders, a Linux kernel and a root filesystem. Because these programs are
+quite old we reflash the NAND and replace the stack with more recent versions
+of the programs. Reflashing the NAND is dangerous and can lead to bricked and
+unusable devices. In a series of 3 posts I'll demonstrate how to fix a bricked
+CORE 9G25. In this first post I'll explain how normal reflash procudere and
+boot procedure of the CORE 9G25 work. The second post will be about reflashing
+the NAND using the tool SAM-BA on Linux. The third post will be about the same
+thing, but then Windows is used to fix the NAND.
 
 ## Reflash procedure
-Reflashing the content on the Nand can be easy.  During boot, the bootloader
-U-boot checks if an USB device is present. If so, it'll look for certain files
-on that USB drive to write to the Nand. If you want to replace the Linux
-kernel, for example, you've to put a file called `uImage` on the USB device. In
-the snippet below you can see how U-boot replaces everything on the Nand.
+Reflashing the content on the Nand is easy when all goes well. During boot, the
+bootloader U-boot look for an USB drive to be present. When it's found so
+U-Boot will look for files with specific names, load them into RAM before writing
+them to specific segments of the NAND flash. So if you want to replace the Linux
+kernel you've to make sure to put a file called `uImage` on the USB drive.
+The snippet below shows the output of the U-Boot script that replaces the
+content on the NAND.
 
 ```
 1 Storage Device(s) found
@@ -59,28 +66,35 @@ Erase NAND flash 0x800000 0xf800000 OK
 ### Update OK ### Please RESET the board ###
 ```
 
-First U-Boot loads the file `at91sam9x5ek-nandflashboot-uboot-3.5.3.bin`, than
-it ereases a block of `0x40000` bytes, starting at `0x0`. It then writes the
-file to Nand, aligning the program at address `0x0`. The file
-`at91sam9x5ek-nandflashboot-uboot-3.5.3.bin` contains the bootloader
-[AT91Bootstrap][at91bootstrap].
+As you can see U-Boot updates the NAND using 5 files.
 
-The other files are flashed the same way, only their addresses are different.
+* `at91sam9x5ek-nandflashboot-uboot-3.5.3.bin` - the bootloader
+[AT91Bootstrap][at91bootstrap]
+* `u-boot.bin` - the bootloader U-Boot
+* `at91sam9g25ek.dtb` - the device tree blob
+* `uImage` - the Linux kernel
+* `rootfs.img` - the root filesystem
+
+First U-Boot loads the file `at91sam9x5ek-nandflashboot-uboot-3.5.3.bin`, than
+it ereases a block of `0x40000` bytes on the NAND, starting at `0x0`. It then
+writes the file to Nand, aligning the program at address `0x0`.
 
 ## Risks
-Because U-Boot performs the update, replacing the kernel or the root filesystem
-like this can be done without risks. When it goes wrong you just try it another
-time.
+Because U-Boot performs the update, updating U-Boot is risky.  What happens if
+the binaries for AT91Boostrap or U-Boot aren't compiled correctly? Or what if
+the power is lost during the update?  Or what if you've replaced the original
+U-Boot with a version that doesn't contain the update script (yes, I've done
+that)? Well, you're devices bricked.
 
-But what if you want to update U-Boot itself? That is a risky operation. When
-it goes wrong the device is unable to boot and it is bricked. Over the years
-I've bricked a few dozen CORE 9G25's. Only recently I discovered how to unbrick
-a the CORE 9G25. In order to understand fully how I managed to do that I'll
-explain the boot process of AT91SAM9G25 CPU.
+Only recently together my college Marten van Houten and I managed to reflash
+the NAND using tools provided but the vendor of the CPU.
+
+In order to understand fully how we managed to do that I'll explain the boot
+process of AT91SAM9G25 CPU.
 
 ## Boot process
-The following snippet is taken from chapter 10 Boot strategies of [SAM9G25's
-datasheet][datasheet] and explains the boot process:
+The following snippet is taken from chapter 10 'Boot strategies' of [AT91SAM9G25's
+datasheet][datasheet] and it explains the boot process:
 
 > The system always boots at address `0x0`. To ensure maximum boot
 > possibilities, the memory layout can be changed with the BMS pin. This allows
@@ -93,24 +107,23 @@ datasheet][datasheet] and explains the boot process:
 > If BMS is detected at `1`, the boot memory is the embedded ROM and the Boot
 > Program described below is executed.
 
-Upon receiving power the CPU starts the program at address `0x0`.
-Normally, that is when the BMS pin is `0`, the Nand is layed out to this address.
-So the CPU starts the program that is located at `0x0` on the Nand.
+Upon receiving power the CPU starts the program at address `0x0`.  Normally,
+that is when the BMS pin is `0`, the NAND is layed out to this address. So
+when the CPU starts the program that is located at `0x0` on the NAND.
 
-And which program is at this address? Well, according to the output of the
-update mechanism that is `at91sam9x5ek-nandflashboot-uboot-3.5.3.bin`, which
-is the bootloader AT91Boostrap.
+And which program is at this address? Well, that is AT91Bootstrap.
 
 ## SAM-Ba to the rescue
-if your cannot boot from your Nand anymore, you can enable the BMS pin. Now the
-CPU starts the program that is located at address `0x0` on the ROM. And that
-program is SAM-BA. SAM-BA allows users to reprogram the Nand en thus debricking
-Nand using the a Linux or Windows program which is also called
-[SAM-BA][sam-ba].
+But if you set the BMS pin to `1`, the memory lay out is modified.
+Instead of the NAND, the ROM is now layed out at address `0x0`. The program
+that is found on `0x0` on the ROM will be executed.
 
-You can find the instructions on how to reflash your nand in the next posts.
+The AT91SAM9G25 CPU comes with a 64 kB ROM. This ROM contains a program called
+[SAM boot agent (SAM-BA)][sam-ba]. This program allows one to reprogram the
+NAND flash. But I'll discuss that in 2 other posts.
 
 [acs]: https://www.acs-buildings.com/
+[corewind]: http://www.armdevs.com/picture/CORE%209G25.html
 [at91bootstrap]: https://github.com/linux4sam/at91bootstrap
 [core9g25]:http://www.armdevs.com/CORE%209G25.html
 [at91sam9g25]: http://www.microchip.com/wwwproducts/en/AT91sam9g25
