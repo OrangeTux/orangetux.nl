@@ -1,6 +1,6 @@
 +++
 title= "Debricking CORE 9G25: Understanding the boot process"
-date= 2018-05-20T11:02:29+02:00
+date= 2018-05-23T11:02:29+02:00
 series = ["Debrick CORE 9G25"]
 author = "Auke Willem Oosterhoff"
 description = "First post about fixing a bricked CORE 9G25 using SAM-BA."
@@ -18,7 +18,7 @@ shows the SoM, taken from the website of [CoreWind][corewind].
 
 The vendor doesn't ship the SoM with an empty NAND. It already contains 2
 bootloaders, a Linux kernel and a root filesystem. Because these programs are
-quite old we reflashed the NAND and ieplaced the stack with more recent
+quite old we reflashed the NAND and replaced the stack with more recent
 versions of the programs. Reflashing the NAND is dangerous and can lead to
 bricked and therefor unusable devices. In a series of 3 posts I'll demonstrate
 how to fix a bricked CORE 9G25. In this first post I'll explain how a normal
@@ -75,7 +75,7 @@ As you can see U-Boot updates the NAND using 5 files.
 * `uImage` - the Linux kernel
 * `rootfs.img` - the root filesystem
 
-First U-Boot loads the file `at91sam9x5ek-nandflashboot-uboot-3.5.3.bin`, th
+First U-Boot loads the file `at91sam9x5ek-nandflashboot-uboot-3.5.3.bin`, then
 it ereases a block of `0x40000` bytes on the NAND, starting at `0x0`. It then
 writes the file to Nand, aligning the program at address `0x0`.
 
@@ -86,7 +86,7 @@ the power is lost during the update?  Or what if you've replaced the original
 U-Boot with a version that doesn't contain the update script (yes, I've done
 that)? Well, your devices are bricked.
 
-Recently my college Marten van Houten and I managed to reflash the NAND using
+Recently my collegue Marten van Houten and I managed to reflash the NAND using
 tools provided by the vendor of the CPU.
 
 In order to fully understand how we did that I'll explain the boot
