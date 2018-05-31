@@ -77,7 +77,12 @@ As you can see U-Boot updates the NAND using 5 files.
 
 First U-Boot loads the file `at91sam9x5ek-nandflashboot-uboot-3.5.3.bin`, th
 it ereases a block of `0x40000` bytes on the NAND, starting at `0x0`. It then
-writes the file to Nand, aligning the program at address `0x0`.
+
+writes the file to NAND, aligning the program at address `0x0`.
+The next image is a graphical overview of the layout of the NAND, showing the
+same addresses as used in the update script.
+
+{{<figure src="/img/nand-layout.jpg">}}
 
 ## Risks
 Because U-Boot performs the update, updating U-Boot is risky.  What happens if
