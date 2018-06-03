@@ -22,9 +22,11 @@ quite old we reflashed the NAND and ieplaced the stack with more recent
 versions of the programs. Reflashing the NAND is dangerous and can lead to
 bricked and therefor unusable devices. In a series of 3 posts I'll demonstrate
 how to fix a bricked CORE 9G25. In this first post I'll explain how a normal
-reflash procedure and boot procedure of the CORE 9G25 work. The second post
-will be about reflashing the NAND using the tool SAM-BA on Linux. The third
-post will be about the same thing, but then Windows is used to fix the NAND.
+reflash procedure and boot procedure of the CORE 9G25 work. The
+[second post]({{< relref "post/debrick-core9g25-using-sam-ba-on-linux.md" >}})
+will be about about reflashing the NAND using the tool SAM-BA on Linux. The
+third post will be about the same thing, but then Windows is used to fix the
+NAND.
 
 ## Reflash procedure
 Reflashing the content on the NAND is easy when all goes well. During boot, the
@@ -127,7 +129,8 @@ The AT91SAM9G25 CPU comes with a 64 kB ROM and contains a program called
 [SAM boot agent (SAM-BA)][sam-ba]. This program allows one to reprogram the
 NAND flash.
 
-In the next posts post I'll demonstrate how to do this. The second post
+In the next posts post I'll demonstrate how to do this. The
+[second post]({{< relref "post/debrick-core9g25-using-sam-ba-on-linux.md" >}})
 of this series will be about reflashing the NAND using a Linux machine. In the
 third post I'll show how to use a Windows machine to debrick the CORE 9G25.
 
