@@ -2,7 +2,6 @@
 date = "2016-08-06T13:00:00+01:00"
 description = "Introducing Ted, a car computer I'm going to build."
 title = "TED0: Have you met Ted?"
-series = ["Ted"]
 slug = "have-you-met-ted"
 author = "Auke Willem Oosterhoff"
 +++
@@ -37,7 +36,7 @@ different hardware later on in the process.
 
 I’m going to start with creating a virtual car dashboard showing metrics and
 stats obtained using the OBD-II connector. In the [next post]({{< relref
-"post/obd_ii_elm327_and_python.md" >}}) you can read more about the OBD-II
+"posts/obd_ii_elm327_and_python.md" >}}) you can read more about the OBD-II
 connector. I’ve yet to decide what display server and GUI library to use.
 Currently I don’t even have decided what language(s) I’m going to use.
 

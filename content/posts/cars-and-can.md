@@ -2,12 +2,11 @@
 date = "2017-10-21T13:37:00+01:00"
 description = "Use a cars CAN bus to read live data."
 title = "TED2: Cars and CAN"
-series = ["Ted"]
 slug = "cars-and-can"
 author = "Auke Willem Oosterhoff"
 +++
 
-In [previous post]({{< relref "post/obd_ii_elm327_and_python.md">}}) of this
+In [previous post]({{< relref "posts/obd_ii_elm327_and_python.md">}}) of this
 series I demonstrated how to obtain live data of a car by using an OBD-II
 adapter. I was a bit disappointed about the fact that I could only read a
 handful of parameters. Together with Wisse Hooghiem I went a step further by

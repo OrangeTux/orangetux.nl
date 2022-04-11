@@ -1,7 +1,6 @@
 +++
 title= "Debricking CORE 9G25: Using SAM-BA on Linux"
 date= 2018-05-31T11:02:29+02:00
-series = ["Debrick CORE 9G25"]
 author = "Auke Willem Oosterhoff"
 description = "Fix a bricked CORE 9G25 using SAM-BA on Linux."
 slug = "debricking-core-9g25-understanding-using-sam-ba-on-linux"
@@ -9,7 +8,7 @@ slug = "debricking-core-9g25-understanding-using-sam-ba-on-linux"
 
 In this post I'll explain how to debrick the CORE 9G25 on a Linux machine. This
 post is the second in a series of series posts. I highly recommend to read the
-[previous post]({{< relref "post/debrick-core9g25-intro.md" >}}) before
+[previous post]({{< relref "posts/debrick-core9g25-intro.md" >}}) before
 continuing. In that post I explained how the boot process works, how the
 update procedure works and the layout of the NAND. This post will be about
 debricking the NAND using SAM-BA on a Linux machine.

@@ -1,7 +1,6 @@
 +++
 title= "Debricking CORE 9G25: Understanding the boot process"
 date= 2018-05-20T11:02:29+02:00
-series = ["Debrick CORE 9G25"]
 author = "Auke Willem Oosterhoff"
 description = "First post about fixing a bricked CORE 9G25 using SAM-BA."
 slug = "debricking-core-9g25-understanding-the-boot-process"
@@ -23,7 +22,7 @@ versions of the programs. Reflashing the NAND is dangerous and can lead to
 bricked and therefor unusable devices. In a series of 3 posts I'll demonstrate
 how to fix a bricked CORE 9G25. In this first post I'll explain how a normal
 reflash procedure and boot procedure of the CORE 9G25 work. The
-[second post]({{< relref "post/debrick-core9g25-using-sam-ba-on-linux.md" >}})
+[second post]({{< relref "posts/debrick-core9g25-using-sam-ba-on-linux.md" >}})
 will be about about reflashing the NAND using the tool SAM-BA on Linux. The
 third post will be about the same thing, but then Windows is used to fix the
 NAND.
@@ -71,7 +70,7 @@ Erase NAND flash 0x800000 0xf800000 OK
 As you can see U-Boot updates the NAND using 5 files.
 
 * `at91sam9x5ek-nandflashboot-uboot-3.5.3.bin` - the bootloader
-[AT91Bootstrap][at91bootstrap] (which I've covered a while ago in the post [Compile AT91Bootstrap using Docker]({{< relref "post/compile_at91bootstrap_using_docker.md" >}}))
+[AT91Bootstrap][at91bootstrap] (which I've covered a while ago in the post [Compile AT91Bootstrap using Docker]({{< relref "posts/compile_at91bootstrap_using_docker.md" >}}))
 * `u-boot.bin` - the bootloader U-Boot
 * `at91sam9g25ek.dtb` - the device tree blob
 * `uImage` - the Linux kernel
@@ -130,7 +129,8 @@ The AT91SAM9G25 CPU comes with a 64 kB ROM and contains a program called
 NAND flash.
 
 In the next posts post I'll demonstrate how to do this. The
-[second post]({{< relref "post/debrick-core9g25-using-sam-ba-on-linux.md" >}})
+series = ["Debrick CORE 9G25"]
+[second post]({{< relref "posts/debrick-core9g25-using-sam-ba-on-linux.md" >}})
 of this series will be about reflashing the NAND using a Linux machine. In the
 third post I'll show how to use a Windows machine to debrick the CORE 9G25.
 

@@ -13,7 +13,7 @@ Get the theme:
 
 ```
 $ mkdir themes
-$ git clone https://github.com/digitalcraftsman/hugo-steam-theme.git themes/hugo-steam-theme
+$ git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt
 ```
 
 Run it:

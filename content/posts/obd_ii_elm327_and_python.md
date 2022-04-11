@@ -2,11 +2,10 @@
 date = "2016-08-06T14:00:00+01:00"
 description = "Read live data from a car using the OBD-connector and Python."
 title = "TED1: OBD-II, ELM327 and Python"
-series = ["Ted"]
 slug = "obd-ii-elm327-and-python"
 +++
 
-In the [previous post]({{< relref "post/have_you_met_ted.md" >}}) I
+In the [previous post]({{< relref "posts/have_you_met_ted.md" >}}) I
 introduced you to Ted, a car computer that I plan to build. In this posts I
 describe my first steps: getting live data from the car using the OBD-II
 connector and Python.
